@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/products', 'ProductController@index');
+Route::post('/products/{id}', 'ProductController@destroy');
