@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Config;
 
 class Product extends Model
 {
@@ -29,4 +30,16 @@ class Product extends Model
      * @var array
      */
     protected $fillable = ['name', 'price', 'image', 'description'];
+
+    /**
+     * Get the product's image path.
+     *
+     * @return string
+     */
+    public function getImagePathAttribute()
+    {
+        $defaultFileStorage= Config::get('filesystems.default');
+        $imagefolderUrl= Config::get('filesystems.disks.' . $defaultFileStorage . '.folderUrl') ;
+        return $imagefolderUrl . '/' . $this->image;
+    }
 }

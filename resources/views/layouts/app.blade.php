@@ -8,32 +8,40 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
         <!-- CSS Files -->
         <link href="https://demos.creative-tim.com/material-dashboard/assets/css/material-dashboard.min.css?v=2.1.1" rel="stylesheet" />
+
+        <!-- Styles -->
+        <style>
+            .product__image {
+                width: 150px;
+                height: auto;
+            }
+        </style>
     </head>
     <body>
         <div class="wrapper ">
             @section('sidebar')
-            <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+            <div class="sidebar" data-color="purple" data-background-color="white" data-image="">
               <!--
                 Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
                 Tip 2: you can also add an image using data-image tag
             -->
               <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                <a href="https://github.com/railsgem" class="simple-text logo-normal">
                   Product Management
                 </a>
               </div>
               <div class="sidebar-wrapper">
                 <ul class="nav">
                   <li class="nav-item active">
-                    <a class="nav-link" href="./dashboard.html">
+                    <a class="nav-link" href="/products">
                       <i class="material-icons">dashboard</i>
                       <p>Dashboard</p>
                     </a>
                   </li>
                 </ul>
               </div>
-            <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-1.jpg) "></div>
+            <div class="sidebar-background" style=""></div>
         </div>
 
 
@@ -76,34 +84,15 @@
             <div class="container-fluid">
                 <nav class="float-left">
                 <ul>
-                    <li>
-                    <a href="https://www.creative-tim.com">
-                        Creative Tim
-                    </a>
-                    </li>
-                    <li>
-                    <a href="https://creative-tim.com/presentation">
-                        About Us
-                    </a>
-                    </li>
-                    <li>
-                    <a href="http://blog.creative-tim.com">
-                        Blog
-                    </a>
-                    </li>
-                    <li>
-                    <a href="https://www.creative-tim.com/license">
-                        Licenses
-                    </a>
-                    </li>
+
                 </ul>
                 </nav>
                 <div class="copyright float-right">
                 ©
                 <script>
                     document.write(new Date().getFullYear())
-                </script>2018, made with <i class="material-icons">favorite</i> by
-                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+                </script>, made with <i class="material-icons">favorite</i> by
+                <a href="https://github.com/railsgem" target="_blank">Railsgem</a> for a better web.
                 </div>
             </div>
             </footer>
@@ -143,17 +132,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
   <!-- Library for adding dinamically elements -->
   <script src="https://demos.creative-tim.com/material-dashboard/assets/js/plugins/arrive.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Yno10-YTnLjjn_Vtk0V8cdcY5lC4plU"></script>
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Chartist JS -->
-  <script src="https://demos.creative-tim.com/material-dashboard/assets/js/plugins/chartist.min.js"></script>
   <!--  Notifications Plugin    -->
   <script src="https://demos.creative-tim.com/material-dashboard/assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="https://demos.creative-tim.com/material-dashboard/assets/js/material-dashboard.min.js?v=2.1.1" type="text/javascript"></script>
-
   <script src="{{asset('/js/vendor_app.js')}}"></script>
   <script type="text/javascript">
     $(document).ready(function() {

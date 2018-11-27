@@ -13,7 +13,10 @@
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Product Table</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
+            <p class="card-category"> a list of products</p>
+            <a href="/product/create" class="btn btn-round btn-info">
+                <i class="material-icons">library_add</i> Add Product
+            </a>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -41,10 +44,10 @@
                 @foreach($products as $product)
                   <tr>
                     <td>
-                        {{$product->name}}
+                        <a class="" href="{{'/products/show/' . $product->id}}">{{$product->name}}</a>
                     </td>
                     <td>
-                        {{-- <img src="{{$product->image}}" alt="Raised Image" class="img-rounded img-responsive" /> --}}
+                        <a class="" href="{{'/products/show/' . $product->id}}"><img src="{{$product->image_path}}" alt="Raised Image" class="img-rounded img-responsive product__image" /></a>
                     </td>
                     <td>
                         {{$product->description}}
@@ -57,12 +60,10 @@
                             class="deleteModal" data-toggle="modal"
                             data-target="#deleteModal{{$product->id}}"><i class="material-icons">delete</i>
                         </a>
-                        <a href="#" id="{{$product->id}}" class="editComboMealModal" data-toggle="modal"
-                            data-target="#addComboMealModal">
+                        <a href="{{ url('products/edit/' . $product->id)}}">
                             <i class="material-icons">create</i>
                         </a>
                     </td>
-
                     @include('product.delete')
                   </tr>
                 @endforeach

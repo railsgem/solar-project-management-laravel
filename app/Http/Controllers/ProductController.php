@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductPost;
+use App\Http\Requests\ProductUpdate;
+use Config;
 
 class ProductController extends Controller
 {
@@ -25,18 +28,27 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('product.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param ProductPost $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductPost $request)
     {
-        //
+        $path = $request->image->store('images');
+        Product::create(
+            [
+                'name' => $request['name'],
+                'price' => $request['price'] * 100,
+                'description' => $request['description'],
+                'image' => $path,
+            ]
+        );
+        return redirect()->action('ProductController@index')->with('message', 'Product Create Successfully.');
     }
 
     /**
@@ -45,9 +57,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('product.show', ['product' => $product]);
     }
 
     /**
@@ -56,9 +69,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('product.edit', ['product' => $product]);
     }
 
     /**
@@ -68,9 +82,19 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductUpdate $request, $id)
     {
-        //
+        $product = Product::where('id', $id)->first();
+        $path = $product['image'];
+        if ($request->file('image')) {
+            $path = $request->image->store('images');
+        }
+        $product->name = $request->name;
+        $product->price = $request->price * 100;
+        $product->description = $request->description;
+        $product->image = $path;
+        $product->save();
+        return redirect()->action('ProductController@index')->with('message', 'Product Update Successfully.');
     }
 
     /**
