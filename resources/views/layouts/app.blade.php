@@ -15,6 +15,7 @@
                 width: 150px;
                 height: auto;
             }
+            .fileinput-new .img-rounded,
             .fileinput-preview.fileinput-exists.img-rounded img {
                 min-width: 200px;
                 max-width: 500px;

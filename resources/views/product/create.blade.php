@@ -22,7 +22,7 @@
                         <label class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group {{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <input class="form-control" type="text" name="name" required="true" aria-required="true" value={{ old('name') }}>
+                                <input class="form-control" type="text" name="name" required="true" aria-required="true" value="{{ old('name') }}">
                                 @if ($errors->has('name'))
                                     <label class="error">
                                         {{ $errors->first('name') }}
@@ -35,7 +35,7 @@
                         <label class="col-sm-2 col-form-label">Price</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group {{ $errors->has('price') ? ' has-danger' : '' }}">
-                            <input class="form-control" type="number" name="price" number="true" required="true" aria-required="true" value={{ old('price') }}>
+                            <input class="form-control" type="number" name="price" number="true" required="true" aria-required="true" value="{{ old('price') }}">
                             @if ($errors->has('price'))
                                 <label class="error">
                                     {{ $errors->first('price') }}
@@ -48,7 +48,7 @@
                         <label class="col-sm-2 col-form-label">Description</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group {{ $errors->has('description') ? ' has-danger' : '' }}">
-                            <input class="form-control" type="text" name="description" required="true" aria-required="true" value={{ old('description') }}>
+                            <textarea rows=5 class="form-control" type="text" name="description" required="true" aria-required="true">{{ old('description') }}</textarea>
                             @if ($errors->has('description'))
                                 <label class="error">
                                     {{ $errors->first('description') }}
@@ -76,7 +76,7 @@
                                     <span class="btn btn-raised btn-round btn-default btn-file">
                                         <span class="fileinput-new">Select image</span>
                                         <span class="fileinput-exists">Change</span>
-                                        <input type="file" accept="image/png, image/jpeg, image/jpg, image/gif" name="image" id="item_image" class="form-control" value={{ old('image') }}/>
+                                        <input type="file" accept="image/png, image/jpeg, image/jpg, image/gif" name="image" id="item_image" class="form-control" value="{{ old('image') }}"/>
                                     </span>
                                     <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                 </div>

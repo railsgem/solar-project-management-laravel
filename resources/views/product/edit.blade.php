@@ -22,7 +22,7 @@
                         <label class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group">
-                            <input class="form-control" type="text" name="name" required="true" aria-required="true" value={{ $product->name }}>
+                            <input class="form-control" type="text" name="name" required="true" aria-required="true" value="{{ $product->name }}">
                             </div>
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                         <label class="col-sm-2 col-form-label">Price</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group">
-                            <input class="form-control" type="number" name="price" number="true" required="true" aria-required="true" value={{ $product->price / 100 }}>
+                            <input class="form-control" type="number" name="price" number="true" required="true" aria-required="true" value="{{ $product->price / 100 }}">
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <label class="col-sm-2 col-form-label">Description</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group">
-                            <input class="form-control" type="text" name="description" required="true" aria-required="true" value={{ $product->description }}>
+                            <textarea rows=5 class="form-control" type="text" name="description" required="true" aria-required="true">{{ $product->description }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                     <span class="btn btn-raised btn-round btn-default btn-file">
                                         <span class="fileinput-new">Select image</span>
                                         <span class="fileinput-exists">Change</span>
-                                        <input type="file" accept="image/*" name="image" id="item_image" class="form-control" value={{ $product->image }}/>
+                                        <input type="file" accept="image/*" name="image" id="item_image" class="form-control" value="{{ $product->image }}"/>
                                     </span>
                                     <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                 </div>
