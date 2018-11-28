@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::sortable(['id' => 'desc'])->paginate(1);
+        $products = Product::sortable(['id' => 'desc'])->paginate(10);
         return view('product.list', ['products' => $products]);
     }
 
