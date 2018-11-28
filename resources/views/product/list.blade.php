@@ -24,7 +24,7 @@
                 <thead class=" text-primary">
                   <tr>
                     <th>
-                        Name
+                        @sortablelink('name')
                     </th>
                     <th>
                         Image
@@ -33,7 +33,7 @@
                         Description
                     </th>
                     <th>
-                        Price
+                        @sortablelink('price')
                     </th>
                     <th>
                         Actions
@@ -41,6 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                 @foreach($products as $product)
                   <tr>
                     <td>

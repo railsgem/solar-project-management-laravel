@@ -6,6 +6,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductPost;
 use App\Http\Requests\ProductUpdate;
+use Illuminate\Support\Facades\Storage;
 use Config;
 
 class ProductController extends Controller
@@ -17,8 +18,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('id', 'desc')->paginate(10);
-        return view('product.product_list', ['products' => $products]);
+        $products = Product::sortable(['id' => 'desc'])->paginate(1);
+        return view('product.list', ['products' => $products]);
     }
 
     /**
@@ -39,16 +40,20 @@ class ProductController extends Controller
      */
     public function store(ProductPost $request)
     {
-        $path = $request->image->store('images');
-        Product::create(
-            [
-                'name' => $request['name'],
-                'price' => $request['price'] * 100,
-                'description' => $request['description'],
-                'image' => $path,
-            ]
-        );
-        return redirect()->action('ProductController@index')->with('message', 'Product Create Successfully.');
+        try {
+            $path = $request->image->store('images');
+            Product::create(
+                [
+                    'name' => $request['name'],
+                    'price' => $request['price'] * 100,
+                    'description' => $request['description'],
+                    'image' => $path,
+                ]
+            );
+            return redirect()->action('ProductController@index')->with('message', 'Product Create Successfully.');
+        } catch (Exception $e) {
+            return redirect()->action('ProductController@index')->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -84,17 +89,21 @@ class ProductController extends Controller
      */
     public function update(ProductUpdate $request, $id)
     {
-        $product = Product::where('id', $id)->first();
-        $path = $product['image'];
-        if ($request->file('image')) {
-            $path = $request->image->store('images');
+        try {
+            $product = Product::where('id', $id)->first();
+            $path = $product['image'];
+            if ($request->file('image')) {
+                $path = $request->image->store('images');
+            }
+            $product->name = $request->name;
+            $product->price = $request->price * 100;
+            $product->description = $request->description;
+            $product->image = $path;
+            $product->save();
+            return redirect()->action('ProductController@index')->with('message', 'Product Update Successfully.');
+        } catch (Exception $e) {
+            return redirect()->action('ProductController@index')->with('error', $e->getMessage());
         }
-        $product->name = $request->name;
-        $product->price = $request->price * 100;
-        $product->description = $request->description;
-        $product->image = $path;
-        $product->save();
-        return redirect()->action('ProductController@index')->with('message', 'Product Update Successfully.');
     }
 
     /**
@@ -106,7 +115,10 @@ class ProductController extends Controller
     public function destroy($id)
     {
         try {
-            Product::where('id', $id)->delete();
+            $product = Product::where('id', $id)->first();
+            $filename = $product['image'];
+            Storage::delete($filename);
+            $product->delete();
             return redirect()->action('ProductController@index')->with('message', 'Item Delete Successfully.');
         } catch (Exception $e) {
             return redirect()->action('ProductController@index')->with('error', $e->getMessage());

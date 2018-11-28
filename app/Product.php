@@ -5,10 +5,18 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Config;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, Sortable;
+
+    /**
+     * The attributes that sortable.
+     *
+     * @var array
+     */
+    public $sortable =  ['id', 'name', 'price', 'image', 'description'];
 
     /**
      * The attributes that should be mutated to dates.
