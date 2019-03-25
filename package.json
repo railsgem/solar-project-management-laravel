@@ -20,6 +20,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "eslint": "^5.9.0"
+        "eslint": "^5.9.0",
+        "material-dashboard": "^2.1.0"
     }
 }
