@@ -10,7 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'ProductController@index');
+
+
+
+Auth::routes();
+Route::get('/', 'HomeController@index');
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/', 'ProductController@index');
 Route::get('/products', 'ProductController@index');
 Route::post('/products/{id}', 'ProductController@destroy');
 
@@ -20,6 +28,3 @@ Route::get('/products/show/{id}', 'ProductController@show');
 
 Route::get('/products/edit/{id}', 'ProductController@edit');
 Route::post('/products/update/{id}', 'ProductController@update');
-
-
-
