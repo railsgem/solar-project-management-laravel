@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.vendor')
 
 @section('title', 'Create Product')
 

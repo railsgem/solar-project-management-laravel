@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>App Name - @yield('title')</title>
+        <title>SP - @yield('title')</title>
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- Required meta tags -->
@@ -9,6 +9,8 @@
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
         <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -40,8 +42,12 @@
                 Tip 2: you can also add an image using data-image tag
             -->
               <div class="logo">
-                <a href="https://github.com/railsgem" class="simple-text logo-normal">
-                  Product Management
+                <a href="/" class="simple-text logo-normal">
+                    <img style="
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 100px;"
+                    src="https://cdn.dribbble.com/users/1492801/screenshots/3637541/solar_logo.png" />
                 </a>
               </div>
               <div class="sidebar-wrapper">
@@ -61,19 +67,91 @@
         <div class="main-panel">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-            <div class="container-fluid">
+                <div class="container-fluid">
                 <div class="navbar-wrapper">
-                {{-- <a class="navbar-brand" href="#pablo">Product List</a> --}}
+                    <a class="navbar-brand" href="#pablo">Dashboard</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon icon-bar"></span>
-                <span class="navbar-toggler-icon icon-bar"></span>
-                <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
+                    <span class="navbar-toggler-icon icon-bar"></span>
                 </button>
-            </div>
+                <div class="collapse navbar-collapse justify-content-end">
+                    <form class="navbar-form">
+                    <div class="input-group no-border">
+                        <input type="text" value="" class="form-control" placeholder="Search...">
+                        <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                        <i class="material-icons">search</i>
+                        <div class="ripple-container"></div>
+                        </button>
+                    </div>
+                    </form>
+                    <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pablo">
+                        <i class="material-icons">dashboard</i>
+                        <p class="d-lg-none d-md-block">
+                            Stats
+                        </p>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="material-icons">notifications</i>
+                        <span class="notification">5</span>
+                        <p class="d-lg-none d-md-block">
+                            Some Actions
+                        </p>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Mike John responded to your email</a>
+                        <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                        <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+                        <a class="dropdown-item" href="#">Another Notification</a>
+                        <a class="dropdown-item" href="#">Another One</a>
+                        </div>
+                    </li>
+                    <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                <li class="nav-item">
+                                    @if (Route::has('register'))
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    @endif
+                                </li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <i class="material-icons">person</i>{{ Auth::user()->name }} <span class="caret"></span>
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Profile</a>
+                                            <a class="dropdown-item" href="#">Settings</a>
+                                            <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
+                    </ul>
+                </div>
+                </div>
             </nav>
             <!-- End Navbar -->
+
             @show
 
             <div class="content">
@@ -112,8 +190,7 @@
         </div>
           </div>
     </body>
-     <!--   Core JS Files   -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <!--   Core JS Files   -->
     <script src="{{ asset('js/core/jquery.min.js') }}"></script>
     <script src="{{ asset('js/core/popper.min.js') }}"></script>
     <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}"></script>
@@ -143,21 +220,22 @@
     <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
     <script src="{{ asset('js/plugins/nouislider.min.js') }}"></script>
     <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js') }}"></script>
+    <script src="{{ asset('js/core/core.js') }}"></script>
     <!-- Library for adding dinamically elements -->
     <script src="{{ asset('js/plugins/arrive.min.js') }}"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!--  Notifications Plugin    -->
     <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('js/material-dashboard.min.js?v=2.1.1" type="text/javascript') }}"></script>
-    <script src="{{asset('/js/vendor_app.js')}}') }}"></script>
+    <script src="{{ asset('/js/vendor_app.js') }}"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         // Javascript method's body can be found in assets/js/vendor_app.js
         vendor_app.showSuccessNotification();
         vendor_app.showErrorNotification();
     });
-    </script>
+   </script>
+
 </html>
