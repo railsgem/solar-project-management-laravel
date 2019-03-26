@@ -16,7 +16,7 @@ class EavAttribute extends Model
      *
      * @var array
      */
-    public $sortable =  ['id', 'eav_entity_id'];
+    public $sortable =  ['id', 'eav_entity_id', 'attribute_code', 'backend_type', 'frontend_input', 'frontend_label', 'is_required'];
 
     /**
      * The attributes that should be mutated to dates.

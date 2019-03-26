@@ -25,10 +25,10 @@
                 <thead class=" text-primary">
                   <tr>
                     <th>
-                      @sortablelink('attributeCode')
+                      @sortablelink('attribute_code')
                     </th>
                     <th>
-                      @sortablelink('eavEntityName')
+                      @sortablelink('eav_entity_name')
                     </th>
                     <th>
                       @sortablelink('eav_entity_model')

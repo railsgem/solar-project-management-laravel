@@ -13,7 +13,7 @@
                 <input type="hidden" name="eav_attributeId" id="eav_attributeId" value="{{$eav_attribute->id}}" />
                 <div class="modal-body">
                     <div class="tim-typo">
-                        <h3>Delete eav_attribute - {{$eav_attribute->name}}? </h3>
+                        <h3>Delete eav_attribute - {{$eav_attribute->attribute_code}}? </h3>
                     </div>
                 </div>
                 <div class="modal-footer">

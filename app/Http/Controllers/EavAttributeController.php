@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EavAttribute;
+use App\EavEntity;
 use Illuminate\Http\Request;
 use App\Http\Requests\EavAttributePost;
 use App\Http\Requests\EavAttributeUpdate;
@@ -39,7 +40,11 @@ class EavAttributeController extends Controller
      */
     public function create()
     {
-        return view('eav_attribute.create');
+        $eav_entities = EavEntity::all();
+        return view('eav_attribute.create',
+            [
+                'eav_entities' => $eav_entities
+            ]);
     }
 
     /**
@@ -51,15 +56,11 @@ class EavAttributeController extends Controller
     public function store(EavAttributePost $request)
     {
         try {
-            $path = $request->image->store('images');
-            EavAttribute::create(
-                [
-                    'name' => $request['name'],
-                    'price' => $request['price'] * 100,
-                    'description' => $request['description'],
-                    'image' => $path,
-                ]
-            );
+            $input = $request->all();
+            $input['is_required'] = array_key_exists('is_required', $input) && $request['is_required'] != null ? 1 : 0;
+
+//            dd($input);
+            EavAttribute::create($input);
             return redirect()->action('EavAttributeController@index')->with('message', 'EavAttribute Create Successfully.');
         } catch (Exception $e) {
             return redirect()->action('EavAttributeController@index')->with('error', $e->getMessage());

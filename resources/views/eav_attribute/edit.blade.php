@@ -61,20 +61,6 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div class="togglebutton">--}}
-                        {{--<label>--}}
-                            {{--<input type="checkbox" checked="">--}}
-                            {{--<span class="toggle"></span>--}}
-                            {{--Toggle is on--}}
-                        {{--</label>--}}
-                    {{--</div>--}}
-                    {{--<div class="togglebutton">--}}
-                        {{--<label>--}}
-                            {{--<input type="checkbox">--}}
-                            {{--<span class="toggle"></span>--}}
-                            {{--Toggle is off--}}
-                        {{--</label>--}}
-                    {{--</div>--}}
                     <div class="row">
                         <label class="col-sm-2 col-form-label">Is Required</label>
                         <div class="col-sm-7">
