@@ -56,6 +56,6 @@ class Project extends Model
      */
     public function project_attributes()
     {
-        return $this->hasMany('App\ProjectAttrubute', 'project_id', 'id');
+        return $this->hasMany('App\ProjectAttribute', 'project_id', 'id');
     }
 }

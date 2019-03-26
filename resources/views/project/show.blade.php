@@ -26,28 +26,16 @@
                             </div>
                         </div>
                     </div>
+                    @foreach($project->project_attributes as $project_attribute)
                     <div class="row">
-                        <label class="col-sm-2 col-form-label">Price</label>
+                        <label class="col-sm-2 col-form-label">{{ $project_attribute->name }}</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group">
-                                <label class="col-form-label text-primary">${{number_format($project->price/100, 2)}}</label>
+                                <label class="col-form-label text-primary">{{ $project_attribute->value }}</label>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Description</label>
-                        <div class="col-sm-7">
-                            <div class="form-group bmd-form-group">
-                                <label class="col-form-label text-primary">{{$project->description}}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Image</label>
-                        <div class="col-sm-7">
-                            <img src="{{$project->image_path}}">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="card-footer ml-auto mr-auto">
                     <a href="/projects" class="btn btn-rose">Back</a>

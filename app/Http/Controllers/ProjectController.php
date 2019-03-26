@@ -73,7 +73,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::findOrFail($id);
+        $project = Project::with('project_attributes')->findOrFail($id);
         return view('project.show', ['project' => $project]);
     }
 
