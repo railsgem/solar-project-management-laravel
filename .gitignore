@@ -35,3 +35,4 @@ Homestead.json
 .rocketeer/
 storage/database.sqlite
 storage/database.sqlite
+storage/database.sqlite

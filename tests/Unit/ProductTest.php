@@ -10,6 +10,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProductTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic test example.
      *

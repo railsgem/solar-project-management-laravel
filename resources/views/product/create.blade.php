@@ -1,6 +1,7 @@
 @extends('layouts.vendor')
 
 @section('title', 'Create Product')
+@section('products-active', 'active')
 
 @section('sidebar')
     @parent

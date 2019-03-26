@@ -14,8 +14,27 @@
 
 
 Auth::routes();
-Route::get('/', 'ProductController@index');
-Route::get('/home', 'ProductController@index')->name('home');
+Route::get('/', 'ProjectController@index');
+Route::get('/home', 'ProjectController@index')->name('home');
+
+
+/*
+|--------------------------------------------------------------------------
+| Project routes
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+Route::get('/projects', 'ProjectController@index');
+Route::post('/projects/{id}', 'ProjectController@destroy');
+
+Route::get('/project/create', 'ProjectController@create');
+Route::post('/project/store', 'ProjectController@store');
+Route::get('/projects/show/{id}', 'ProjectController@show');
+
+Route::get('/projects/edit/{id}', 'ProjectController@edit');
+Route::post('/projects/update/{id}', 'ProjectController@update');
 
 
 /*
@@ -23,9 +42,6 @@ Route::get('/home', 'ProductController@index')->name('home');
 | Product routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
 |
 */
 
