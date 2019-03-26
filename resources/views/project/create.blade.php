@@ -32,6 +32,21 @@
                             </div>
                         </div>
                     </div>
+                    @foreach ($productAttributes as $productAttribute)
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">{{ $productAttribute->frontend_label }}</label>
+                        <div class="col-sm-7">
+                            <div class="form-group bmd-form-group {{ $errors->has('product_attributes[' . $productAttribute->attribute_code .']') ? ' has-danger' : '' }}">
+                                <input class="form-control" type="text" name="product_attributes[{{ $productAttribute->attribute_code }}]" required="true" aria-required="true" value="{{ old('product_attributes[' . $productAttribute->attribute_code .']') }}">
+                                @if ($errors->has('product_attributes[' . $productAttribute->attribute_code .']'))
+                                    <label class="error">
+                                        {{ $errors->first('product_attributes[' . $productAttribute->attribute_code .']') }}
+                                    </label>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
                 <div class="card-footer ml-auto mr-auto">
                     <a href="/projects" class="btn btn-default">Back</a>

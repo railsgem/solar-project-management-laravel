@@ -11,6 +11,20 @@ class ProjectAttributeTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\ProjectAttribute::class, 2000)->create();
+        $projects = App\Project::all();
+        $faker = Faker\Factory::create();
+        $productAttributes = \App\EavAttribute::where('eav_entity_id', 1)->get();
+        foreach ($projects as $project) {
+            foreach ($productAttributes as $productAttribute) {
+                \App\ProjectAttribute::create(
+                    [
+                        'project_id' => $project->id,
+                        'name' => $productAttribute['attribute_code'],
+                        'value' => $faker->sentence($nbWords = 2, $variableNbWords = true),
+                    ]
+                );
+            }
+        }
+
     }
 }

@@ -58,8 +58,6 @@ class EavAttributeController extends Controller
         try {
             $input = $request->all();
             $input['is_required'] = array_key_exists('is_required', $input) && $request['is_required'] != null ? 1 : 0;
-
-//            dd($input);
             EavAttribute::create($input);
             return redirect()->action('EavAttributeController@index')->with('message', 'EavAttribute Create Successfully.');
         } catch (Exception $e) {

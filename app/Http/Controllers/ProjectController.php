@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\EavAttribute;
 use App\Project;
+use App\ProjectAttribute;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectPost;
 use App\Http\Requests\ProjectUpdate;
@@ -40,7 +42,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        $productAttributes = EavAttribute::where('eav_entity_id', 1)->get();
+        return view('project.create', ['productAttributes' => $productAttributes]);
     }
 
     /**
@@ -52,13 +55,24 @@ class ProjectController extends Controller
     public function store(ProjectPost $request)
     {
         $user_id = Auth::id();
+        $product_attributes = $request['product_attributes'];
+
         try {
-            Project::create(
+            $project = Project::create(
                 [
                     'user_id' => $user_id,
                     'name' => $request['name']
                 ]
             );
+            foreach ($product_attributes as $key => $value) {
+                ProjectAttribute::create(
+                    [
+                        'project_id' => $project['id'],
+                        'name' => $key,
+                        'value' => $value,
+                        ]
+                );
+            }
             return redirect()->action('ProjectController@index')->with('message', 'Project Create Successfully.');
         } catch (Exception $e) {
             return redirect()->action('ProjectController@index')->with('error', $e->getMessage());
