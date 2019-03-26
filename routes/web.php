@@ -54,3 +54,22 @@ Route::get('/products/show/{id}', 'ProductController@show');
 
 Route::get('/products/edit/{id}', 'ProductController@edit');
 Route::post('/products/update/{id}', 'ProductController@update');
+
+
+/*
+|--------------------------------------------------------------------------
+| EavAttribute routes
+|--------------------------------------------------------------------------
+|
+|
+*/
+
+Route::get('/eav_attributes', 'EavAttributeController@index');
+Route::post('/eav_attributes/{id}', 'EavAttributeController@destroy');
+
+Route::get('/eav_attribute/create', 'EavAttributeController@create');
+Route::post('/eav_attribute/store', 'EavAttributeController@store');
+Route::get('/eav_attributes/show/{id}', 'EavAttributeController@show');
+
+Route::get('/eav_attributes/edit/{id}', 'EavAttributeController@edit');
+Route::post('/eav_attributes/update/{id}', 'EavAttributeController@update');

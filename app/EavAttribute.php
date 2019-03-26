@@ -46,6 +46,6 @@ class EavAttribute extends Model
      */
     public function eav_entity()
     {
-        return $this->belongsTo('App\EavEntity', 'id', 'eav_entity_id');
+        return $this->belongsTo('App\EavEntity', 'eav_entity_id', 'id');
     }
 }

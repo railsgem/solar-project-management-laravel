@@ -31,7 +31,7 @@ class EavEntity extends Model
      *
      * @var string
      */
-    protected $table = 'eav_attributes';
+    protected $table = 'eav_entity';
 
     /**
      * The attributes that are mass assignable.

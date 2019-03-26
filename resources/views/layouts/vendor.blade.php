@@ -11,6 +11,9 @@
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/css/bootstrap-select.min.css">
+
         <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -56,6 +59,12 @@
                         <a class="nav-link" href="/projects">
                             <i class="material-icons">dashboard</i>
                             <p>Projects</p>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('eav_attributes-active')">
+                        <a class="nav-link" href="/eav_attributes">
+                            <i class="material-icons">dashboard</i>
+                            <p>EAV Attribute</p>
                         </a>
                     </li>
                     {{--<li class="nav-item @yield('products-active')">--}}
@@ -210,7 +219,15 @@
     <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
     <script src="{{ asset('js/plugins/jquery.bootstrap-wizard.js') }}"></script>
     <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-    <script src="{{ asset('js/plugins/bootstrap-selectpicker.js') }}"></script>
+    {{--<script src="{{ asset('js/plugins/bootstrap-selectpicker.js') }}"></script>--}}
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.7/dist/js/i18n/defaults-*.min.js"></script>
+
+
     <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
     <script src="{{ asset('js/plugins/bootstrap-datetimepicker.min.js') }}"></script>
     <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
