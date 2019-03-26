@@ -61,11 +61,34 @@
                             </div>
                         </div>
                     </div>
+                    {{--<div class="togglebutton">--}}
+                        {{--<label>--}}
+                            {{--<input type="checkbox" checked="">--}}
+                            {{--<span class="toggle"></span>--}}
+                            {{--Toggle is on--}}
+                        {{--</label>--}}
+                    {{--</div>--}}
+                    {{--<div class="togglebutton">--}}
+                        {{--<label>--}}
+                            {{--<input type="checkbox">--}}
+                            {{--<span class="toggle"></span>--}}
+                            {{--Toggle is off--}}
+                        {{--</label>--}}
+                    {{--</div>--}}
                     <div class="row">
                         <label class="col-sm-2 col-form-label">Is Required</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group">
-                                <input class="form-control" type="text" name="is_required" required="true" aria-required="true" value="{{ $eav_attribute->is_required }}">
+                                <div class="togglebutton">
+                                    <label>
+                                        <input type="checkbox" name="is_required" required="true" aria-required="true" value="{{ $eav_attribute->is_required }}"
+                                               @if($eav_attribute->is_required == 1)
+                                                 checked
+                                               @endif
+                                        >
+                                        <span class="toggle"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>

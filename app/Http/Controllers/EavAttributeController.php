@@ -102,6 +102,7 @@ class EavAttributeController extends Controller
         try {
             $eav_attribute = EavAttribute::where('id', $id)->first();
             $input = $request->all();
+            $input['is_required'] = array_key_exists('is_required', $input) ? 1 : 0;
             $eav_attribute->fill($input)->save();
             return redirect()->action('EavAttributeController@index')->with('message', 'EavAttribute '. $eav_attribute['attribute_code'].' Update Successfully.');
         } catch (Exception $e) {
