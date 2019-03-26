@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             ProjectTableSeeder::class,
-            ProjectAttributeTableSeeder::class
+            ProjectAttributeTableSeeder::class,
+            EavEntityTableSeeder::class, // required
+            EavAttributeTableSeeder::class
         ]);
     }
 }

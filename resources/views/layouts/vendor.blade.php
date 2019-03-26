@@ -58,12 +58,12 @@
                             <p>Projects</p>
                         </a>
                     </li>
-                    <li class="nav-item @yield('products-active')">
-                        <a class="nav-link" href="/products">
-                            <i class="material-icons">dashboard</i>
-                            <p>Products</p>
-                        </a>
-                    </li>
+                    {{--<li class="nav-item @yield('products-active')">--}}
+                        {{--<a class="nav-link" href="/products">--}}
+                            {{--<i class="material-icons">dashboard</i>--}}
+                            {{--<p>Products</p>--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
                 </ul>
               </div>
             <div class="sidebar-background" style=""></div>
