@@ -14,11 +14,11 @@
 
 
 Auth::routes();
-Route::get('/', 'ProjectController@index');
-Route::get('/home', 'ProjectController@index')->name('home');
+// Route::get('/', 'ProjectController@index');
+// Route::get('/home', 'ProjectController@index')->name('home');
 
 
-Auth::routes();
+// Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -39,15 +39,15 @@ Route::group(['middleware' => 'auth'], function () {
 |
 */
 
-Route::get('/projects', 'ProjectController@index');
-Route::post('/projects/{id}', 'ProjectController@destroy');
+// Route::get('/projects', 'ProjectController@index');
+// Route::post('/projects/{id}', 'ProjectController@destroy');
 
-Route::get('/project/create', 'ProjectController@create');
-Route::post('/project/store', 'ProjectController@store');
-Route::get('/projects/show/{id}', 'ProjectController@show');
+// Route::get('/project/create', 'ProjectController@create');
+// Route::post('/project/store', 'ProjectController@store');
+// Route::get('/projects/show/{id}', 'ProjectController@show');
 
-Route::get('/projects/edit/{id}', 'ProjectController@edit');
-Route::post('/projects/update/{id}', 'ProjectController@update');
+// Route::get('/projects/edit/{id}', 'ProjectController@edit');
+// Route::post('/projects/update/{id}', 'ProjectController@update');
 
 
 /*

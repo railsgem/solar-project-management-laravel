@@ -1,16 +1,15 @@
-@extends('layouts.vendor')
+@extends('layouts.app', ['title' => __('User Management')])
 
-@section('title', 'Edit Project')
 @section('projects-active', 'active')
-
-@section('sidebar')
-    @parent
-@endsection
-
 @section('content')
-<div class="container-fluid">
+@include('project.partials.header', ['title' => __('Edit Project')])
+
+<div class="container-fluid mt--7">
     <div class="col-md-12">
-        <form id="create_project" class="form-horizontal" action="{{ url('projects/update/' . $project->id) }}" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+        <form method="post" action="{{ route('project.update', $project) }}" autocomplete="off">
+            @csrf
+            @method('put')
+        {{-- <form id="create_project" class="form-horizontal" action="{{ url('project/update/' . $project->id) }}" method="POST" novalidate="novalidate" enctype="multipart/form-data"> --}}
             <div class="card ">
                 <div class="card-header card-header-rose card-header-text">
                     <div class="card-text">
@@ -29,7 +28,7 @@
                     </div>
                 </div>
                 <div class="card-footer ml-auto mr-auto">
-                    <a href="/projects" class="btn btn-default">Back</a>
+                    <a href="/project" class="btn btn-default">Back</a>
                     <button type="submit" class="btn btn-rose">Update Project</button>
                 </div>
             </div>

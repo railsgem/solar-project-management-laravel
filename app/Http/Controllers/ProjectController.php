@@ -31,8 +31,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::sortable(['id' => 'desc'])->paginate(10);
-        return view('project.list', ['projects' => $projects]);
+        $user_id = Auth::id();
+        $projects = Project::with('user')->where('user_id', $user_id)->sortable(['id' => 'desc'])->paginate(10);
+        return view('project.index', ['projects' => $projects]);
     }
 
     /**
@@ -47,12 +48,13 @@ class ProjectController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created user in storage
      *
-     * @param ProjectPost $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\Project  $model
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(ProjectPost $request)
+    public function store(ProjectPost $request, Project $model)
     {
         $user_id = Auth::id();
         $product_attributes = $request['product_attributes'];
@@ -73,9 +75,9 @@ class ProjectController extends Controller
                         ]
                 );
             }
-            return redirect()->action('ProjectController@index')->with('message', 'Project Create Successfully.');
+            return redirect()->route('project.index')->withStatus(__('User successfully created.'));
         } catch (Exception $e) {
-            return redirect()->action('ProjectController@index')->with('error', $e->getMessage());
+            return redirect()->route('project.index')->with('error', $e->getMessage());
         }
     }
 
@@ -92,34 +94,30 @@ class ProjectController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified user
      *
      * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $project = Project::findOrFail($id);
-        return view('project.edit', ['project' => $project]);
+        return view('project.edit', compact('project'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified project in storage
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProjectUpdate  $request
      * @param  \App\Project  $project
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(ProjectUpdate $request, $id)
+    public function update(ProjectUpdate $request, Project  $project)
     {
-        try {
-            $project = Project::where('id', $id)->first();
-            $project->name = $request->name;
-            $project->save();
-            return redirect()->action('ProjectController@index')->with('message', 'Project Update Successfully.');
-        } catch (Exception $e) {
-            return redirect()->action('ProjectController@index')->with('error', $e->getMessage());
-        }
+        $project->update(
+            $request->all()
+        );
+
+        return redirect()->route('project.index')->withStatus(__('Project successfully updated.'));
     }
 
     /**
@@ -133,7 +131,7 @@ class ProjectController extends Controller
         try {
             $project = Project::where('id', $id)->first();
             $project->delete();
-            return redirect()->action('ProjectController@index')->with('message', 'Item Delete Successfully.');
+            return redirect()->route('project.index')->withStatus(__('User successfully deleted.'));
         } catch (Exception $e) {
             return redirect()->action('ProjectController@index')->with('error', $e->getMessage());
         }

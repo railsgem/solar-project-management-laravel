@@ -1,23 +1,22 @@
-@extends('layouts.vendor')
+@extends('layouts.app', ['title' => __('User Management')])
 
-@section('title', 'Create Product')
 @section('projects-active', 'active')
-
-@section('sidebar')
-    @parent
-@endsection
-
 @section('content')
-<div class="container-fluid">
+@include('project.partials.header', ['title' => __('Create Project')])
+
+<div class="container-fluid mt--7">
     <div class="col-md-12">
-        <form id="create_project" class="form-horizontal" action="{{ url('project/store') }}" method="POST" novalidate="novalidate" enctype="multipart/form-data">
+
+        {{-- <form id="create_project" class="form-horizontal" action="{{ url('project/store') }}" method="POST" novalidate="novalidate" enctype="multipart/form-data"> --}}
             <div class="card ">
                 <div class="card-header card-header-rose card-header-text">
                     <div class="card-text">
                     <h4 class="card-title">Create Project</h4>
                     </div>
                 </div>
-                {{ csrf_field() }}
+                {{-- {{ csrf_field() }} --}}
+            <form method="post" action="{{ route('project.store') }}" autocomplete="off">
+                    @csrf
                 <div class="card-body ">
                     <div class="row">
                         <label class="col-sm-2 col-form-label">Name</label>
@@ -49,7 +48,7 @@
                     @endforeach
                 </div>
                 <div class="card-footer ml-auto mr-auto">
-                    <a href="/projects" class="btn btn-default">Back</a>
+                    <a href="/project" class="btn btn-default">Back</a>
                     <button type="submit" class="btn btn-rose">Save Project</button>
                 </div>
             </div>
