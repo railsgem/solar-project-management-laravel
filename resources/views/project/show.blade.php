@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body ">
                     <div class="row">
-                        <label class="col-sm-2 col-form-label">Name</label>
+                        <label class="col-sm-4 col-form-label">Name</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group">
                                 <label class="col-form-label text-primary">{{$project->name}}</label>
@@ -28,7 +28,7 @@
                     </div>
                     @foreach($project->project_attributes as $project_attribute)
                     <div class="row">
-                        <label class="col-sm-2 col-form-label">{{ $project_attribute->name }}</label>
+                        <label class="col-sm-4 col-form-label">{{ $project_attribute->name }}</label>
                         <div class="col-sm-7">
                             <div class="form-group bmd-form-group">
                                 <label class="col-form-label text-primary">{{ $project_attribute->value }}</label>
