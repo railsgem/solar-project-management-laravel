@@ -5,54 +5,59 @@
 @include('project.partials.header', ['title' => __('Create Project')])
 
 <div class="container-fluid mt--7">
-    <div class="col-md-12">
-
-        {{-- <form id="create_project" class="form-horizontal" action="{{ url('project/store') }}" method="POST" novalidate="novalidate" enctype="multipart/form-data"> --}}
-            <div class="card ">
-                <div class="card-header card-header-rose card-header-text">
-                    <div class="card-text">
-                    <h4 class="card-title">Create Project</h4>
+    <div class="row">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">{{ __('Project Management') }}</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="{{ route('project.index') }}" class="btn btn-sm btn-primary">{{ __('Back to list') }}</a>
+                        </div>
                     </div>
                 </div>
-                {{-- {{ csrf_field() }} --}}
-            <form method="post" action="{{ route('project.store') }}" autocomplete="off">
+                <div class="card-body">
+                    <form method="post" action="{{ route('project.store') }}" autocomplete="off">
                     @csrf
-                <div class="card-body ">
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">Name</label>
-                        <div class="col-sm-7">
-                            <div class="form-group bmd-form-group {{ $errors->has('name') ? ' has-danger' : '' }}">
-                                <input class="form-control" type="text" name="name" required="true" aria-required="true" value="{{ old('name') }}">
+                        <h6 class="heading-small text-muted mb-4">{{ __('Project information') }}</h6>
+                        <div class="pl-lg-4">
+                            <div class="form-group {{ $errors->has('name') ? ' has-danger' : '' }}">
+                                <label class="form-control-label" for="input-name">{{ __('Name') }}</label>
+                                <input type="text" name="name" id="input-name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+
                                 @if ($errors->has('name'))
-                                    <label class="error">
-                                        {{ $errors->first('name') }}
-                                    </label>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
                                 @endif
                             </div>
-                        </div>
-                    </div>
-                    @foreach ($productAttributes as $productAttribute)
-                    <div class="row">
-                        <label class="col-sm-2 col-form-label">{{ $productAttribute->frontend_label }}</label>
-                        <div class="col-sm-7">
-                            <div class="form-group bmd-form-group {{ $errors->has('product_attributes[' . $productAttribute->attribute_code .']') ? ' has-danger' : '' }}">
-                                <input class="form-control" type="text" name="product_attributes[{{ $productAttribute->attribute_code }}]" required="true" aria-required="true" value="{{ old('product_attributes[' . $productAttribute->attribute_code .']') }}">
-                                @if ($errors->has('product_attributes[' . $productAttribute->attribute_code .']'))
-                                    <label class="error">
-                                        {{ $errors->first('product_attributes[' . $productAttribute->attribute_code .']') }}
-                                    </label>
-                                @endif
+
+                            @foreach ($productAttributes as $productAttribute)
+                                <div class="form-group{{ $errors->has('product_attributes[' . $productAttribute->attribute_code .']') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-name">{{ __($productAttribute->frontend_label) }}</label>
+                                    <input class="form-control form-control-alternative {{ $errors->has('product_attributes[' . $productAttribute->attribute_code .']') ? ' is-invalid' : '' }}" type="text" name="product_attributes[{{ $productAttribute->attribute_code }}]" placeholder="{{ __($productAttribute->frontend_label) }}" value="{{ old('product_attributes[' . $productAttribute->attribute_code .']') }}" autofocus>
+                                    @if ($errors->has('product_attributes[' . $productAttribute->attribute_code .']'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('product_attributes[' . $productAttribute->attribute_code .']') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            @endforeach
+
+                            <div class="text-center">
+                                <a href="/project" class="btn btn-default mt-4">Back</a>
+                                <button type="submit" class="btn btn-success mt-4">Save Project</button>
                             </div>
                         </div>
-                    </div>
-                    @endforeach
-                </div>
-                <div class="card-footer ml-auto mr-auto">
-                    <a href="/project" class="btn btn-default">Back</a>
-                    <button type="submit" class="btn btn-rose">Save Project</button>
+                    </form>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
+</div>
+
+@include('layouts.footers.auth')
 </div>
 @endsection

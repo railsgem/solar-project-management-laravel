@@ -101,7 +101,14 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('project.edit', compact('project'));
+        $project_attributes = Project::with('project_attributes')->findOrFail($project['id'])['project_attributes'];
+        $attributes = [];
+        foreach ($project_attributes as $project_attribute) {
+            $attributes[$project_attribute['name']] = $project_attribute['value'];
+        }
+        $project['project_attributes'] = $project_attributes;
+        $productAttributes = EavAttribute::where('eav_entity_id', 1)->get();
+        return view('project.edit', ['project' => $project, 'attributes' => $attributes, 'productAttributes' => $productAttributes]);
     }
 
     /**
@@ -117,7 +124,23 @@ class ProjectController extends Controller
             $request->all()
         );
 
-        return redirect()->route('project.index')->withStatus(__('Project successfully updated.'));
+        $user_id = Auth::id();
+        $product_attributes = $request['product_attributes'];
+
+        try {
+            foreach ($product_attributes as $key => $value) {
+                ProjectAttribute::updateOrCreate(
+                    [
+                        'project_id' => $project['id'],
+                        'name' => $key,
+                        'value' => $value,
+                    ]
+                );
+            }
+            return redirect()->route('project.index')->withStatus(__('User successfully updated.'));
+        } catch (Exception $e) {
+            return redirect()->route('project.index')->with('error', $e->getMessage());
+        }
     }
 
     /**
