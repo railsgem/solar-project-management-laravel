@@ -1,7 +1,9 @@
 
-## Online Demo: http://brighte-technical-demo.holaapp.com.au/
+## Online Demo: 
 
 
+## Useful commands
+- init DB: `./init-db.sh`
 
 
 ## Name of your chosen PHP framework and why.
