@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\EavAttribute;
 use App\Project;
 use App\ProjectAttribute;
+use App\ProjectCustomer;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectPost;
 use App\Http\Requests\ProjectUpdate;
@@ -32,7 +33,7 @@ class ProjectController extends Controller
     public function index()
     {
         $user_id = Auth::id();
-        $projects = Project::with('user')->where('user_id', $user_id)->sortable(['id' => 'desc'])->paginate(10);
+        $projects = Project::with('user', 'project_customer')->where('user_id', $user_id)->sortable(['id' => 'desc'])->paginate(10);
         return view('project.index', ['projects' => $projects]);
     }
 
@@ -50,7 +51,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created user in storage
      *
-     * @param  \App\Http\Requests\UserRequest  $request
+     * @param  \App\Http\Requests\ProjectPost  $request
      * @param  \App\Project  $model
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -58,6 +59,7 @@ class ProjectController extends Controller
     {
         $user_id = Auth::id();
         $product_attributes = $request['product_attributes'];
+        $customer = $request['customer'];
 
         try {
             $project = Project::create(
@@ -66,16 +68,22 @@ class ProjectController extends Controller
                     'name' => $request['name']
                 ]
             );
-            foreach ($product_attributes as $key => $value) {
-                ProjectAttribute::create(
-                    [
-                        'project_id' => $project['id'],
-                        'name' => $key,
-                        'value' => $value,
+            ProjectCustomer::create(
+                array_merge(['project_id' => $project['id']], $customer)
+            );
+            if (sizeof($product_attributes) > 0) {
+                foreach ($product_attributes as $key => $value) {
+                    if ($value == null) $value = '';
+                    ProjectAttribute::create(
+                        [
+                            'project_id' => $project['id'],
+                            'name' => $key,
+                            'value' => $value,
                         ]
-                );
+                    );
+                }
             }
-            return redirect()->route('project.index')->withStatus(__('User successfully created.'));
+            return redirect()->route('project.index')->withStatus(__('Project successfully created.'));
         } catch (Exception $e) {
             return redirect()->route('project.index')->with('error', $e->getMessage());
         }

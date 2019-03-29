@@ -36,8 +36,8 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col">{{ __('Name') }}</th>
-                                    <th scope="col">{{ __('Email') }}</th>
-                                    <th scope="col">{{ __('Creation Date') }}</th>
+                                    <th scope="col">{{ __('Customer Name') }}</th>
+                                    <th scope="col">{{ __('Customer Address') }}</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -45,8 +45,9 @@
                                 @foreach ($projects as $project)
                                     <tr>
                                         <td>{{ $project->name }}</td>
-                                        <td>{{ $project->user->email }}</td>
-                                        <td>{{ $project->created_at->format('d/m/Y H:i') }}</td>
+                                        <td>{{ $project->project_customer->name }}</td>
+                                        <td>{{ $project->project_customer->address }}</td>
+                                        {{--<td>{{ $project->created_at->format('d/m/Y H:i') }}</td>--}}
                                         <td class="text-right">
                                             <div class="dropdown">
                                                 <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

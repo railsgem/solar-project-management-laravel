@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Config;
 use Kyslik\ColumnSortable\Sortable;
 
-class Project extends Model
+class ProjectCustomer extends Model
 {
     use SoftDeletes, Sortable;
 
@@ -30,42 +30,22 @@ class Project extends Model
      *
      * @var string
      */
-    protected $table = 'projects';
+    protected $table = 'project_customers';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'user_id'];
+    protected $fillable = ['name', 'address', 'contact_no', 'post_code', 'project_id'];
 
     /**
-     * Get the user that the project belongs to.
+     * Get the project that the customer belongs to.
      *
      * @return void
      */
-    public function user()
+    public function project()
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
-    }
-
-    /**
-     * Get the customer that the project belongs to.
-     *
-     * @return void
-     */
-    public function project_customer()
-    {
-        return $this->hasOne('App\ProjectCustomer', 'project_id', 'id');
-    }
-
-    /**
-     * Get the project_attributes for the project.
-     *
-     * @return void
-     */
-    public function project_attributes()
-    {
-        return $this->hasMany('App\ProjectAttribute', 'project_id', 'id');
+        return $this->belongsTo('App\Project', 'id', 'project_id');
     }
 }

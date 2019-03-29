@@ -1,0 +1,9 @@
+$card-margin-bottom: 30px;
+$card-box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);
+
+.card
+{
+  margin-bottom: $card-margin-bottom;
+  border: 0;
+  box-shadow: $card-box-shadow;
+}
