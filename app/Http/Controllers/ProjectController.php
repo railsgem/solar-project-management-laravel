@@ -109,7 +109,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $project_attributes = Project::with('project_attributes')->findOrFail($project['id'])['project_attributes'];
+        $project_attributes = Project::with('project_attributes', 'project_customer')->findOrFail($project['id'])['project_attributes'];
         $attributes = [];
         foreach ($project_attributes as $project_attribute) {
             $attributes[$project_attribute['name']] = $project_attribute['value'];
@@ -134,8 +134,13 @@ class ProjectController extends Controller
 
         $user_id = Auth::id();
         $product_attributes = $request['product_attributes'];
+        $customer = $request['customer'];
 
         try {
+            ProjectCustomer::updateOrCreate(
+                ['project_id' => $project['id']],
+                $customer
+            );
             foreach ($product_attributes as $key => $value) {
                 ProjectAttribute::updateOrCreate(
                     [
